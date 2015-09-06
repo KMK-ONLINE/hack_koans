@@ -1,0 +1,10 @@
+{
+  "require": {
+    "phpunit/phpunit": "4.0.*"
+  },
+  "autoload": {
+    "files": [
+      "kmk.hh"
+    ]
+  }
+}
