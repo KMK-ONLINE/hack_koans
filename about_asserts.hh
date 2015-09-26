@@ -1,6 +1,6 @@
-<?hh // strict
+<?hh
 
-require 'vendor/autoload.php';
+include_once 'kmk.hh';
 
 class AboutAsserts extends PHPUnit_Framework_TestCase {
 

@@ -1,6 +1,4 @@
-<?hh // strict
-
-require 'vendor/autoload.php';
+<?hh
 
 class AboutNull extends PHPUnit_Framework_TestCase {
 
