@@ -5,14 +5,23 @@ include_once 'kmk.hh';
 class AboutArrays extends PHPUnit_Framework_TestCase {
 
   public function test_creating_arrays() {
-    $empty_array = array();
-    $this->assertEquals('array', gettype($empty_array));
-    $this->assertEquals(0, count($empty_array));
+    // Old style initialization
+    $old_array = array();
+    $this->assertEquals('array', gettype($old_array));
+    $this->assertEquals(false, get_class($old_array));
+    $this->assertEquals(0, count($old_array));
+
+    // New literal initialization
+    $new_array = [];
+    $this->assertEquals('array', gettype($new_array));
+    $this->assertEquals(false, get_class($new_array));
+    $this->assertEquals(0, count($new_array));
+
+    $this->assertEquals($new_array, $old_array);
   }
 
-  public function test_array_literal_pushing() {
-    $array = array();
-    $this->assertEquals([], $array);
+  public function test_array_pushing() {
+    $array = [];
 
     $array[] = 1;
     $this->assertEquals([1], $array);
@@ -25,7 +34,7 @@ class AboutArrays extends PHPUnit_Framework_TestCase {
   }
 
   public function test_accessing_array_elements() {
-    $array = array('eat', 'sleep', 'rave', 'repeat');
+    $array = ['eat', 'sleep', 'rave', 'repeat'];
 
     $this->assertEquals('eat', $array[0]);
     $this->assertEquals('repeat', $array[3]);
@@ -37,8 +46,8 @@ class AboutArrays extends PHPUnit_Framework_TestCase {
    * @expectedExceptionCode          8
    */
   public function test_accessing_invalid_indexes() {
-    $array = array('eat', 'sleep', 'rave', 'repeat');
-    print $array[-1];
+    $array = ['eat', 'sleep', 'rave', 'repeat'];
+    $array[-1];
   }
 
   public function test_slicing_arrays() {
@@ -52,10 +61,26 @@ class AboutArrays extends PHPUnit_Framework_TestCase {
     $this->assertEquals([],                 array_slice($array, 5,  0));
   }
 
-  public function test_array_class_is_false() {
-    $array = array();
-    $class = get_class($array);
-    $this->assertEquals(false, $class);
+  public function test_pushing_and_popping_arrays() {
+    $array = [1, 2];
+    array_push($array, 'last');
+
+    $this->assertEquals([1, 2, 'last'], $array);
+
+    $popped_value = array_pop($array);
+    $this->assertEquals('last', $popped_value);
+    $this->assertEquals([1, 2], $array);
+  }
+
+  public function test_shifting_arrays() {
+    $array = [1, 2];
+    array_unshift($array, 'first');
+
+    $this->assertEquals(['first', 1, 2], $array);
+
+    $shifted_value = array_shift($array);
+    $this->assertEquals('first', $shifted_value);
+    $this->assertEquals([1, 2], $array);
   }
 
 }
