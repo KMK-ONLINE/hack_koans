@@ -1,4 +1,4 @@
-<?hh
+<?hh // decl
 
 include_once 'kmk.hh';
 
